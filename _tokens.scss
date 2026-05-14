@@ -1,0 +1,93 @@
+/*-- scss:defaults --*/
+
+// ============================================================
+// Working Papers in Critical Search — design tokens
+// Source of truth for palette, type, layout, motion.
+// ============================================================
+
+// Palette — cool off-white paper, ink-navy, muted blue-violet
+$paper:        #f4f4f2 !default;
+$paper-2:      #ebebe7 !default;
+$paper-3:      #e0e0db !default;
+$ink:          #1a1a2e !default;
+$ink-2:        #2d2d44 !default;
+$ink-mute:     #6b6b7a !default;
+$ink-faint:    #a8a8b2 !default;
+$rule:         rgba(26, 26, 46, 0.12) !default;
+$rule-strong:  rgba(26, 26, 46, 0.22) !default;
+$accent:       #4a5a8a !default;
+$accent-soft:  rgba(74, 90, 138, 0.12) !default;
+$flag:         #8b3a1a !default; // validation errors only
+
+// Type
+$serif: "EB Garamond", "Source Serif 4", "Source Serif Pro", Georgia, serif !default;
+$mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace !default;
+
+// Scale (px) — README-canonical sizes. Display is 60, not 72.
+$fs-micro:   10.5px !default;
+$fs-mono:    12px !default;
+$fs-small:   14px !default;
+$fs-body:    17px !default;
+$fs-lead:    19px !default;
+$fs-h3:      22px !default;
+$fs-h2:      28px !default;
+$fs-h1:      44px !default;
+$fs-display: 60px !default;
+
+// Layout
+$col-gutter: 32px !default;
+$rail-w:     180px !default;
+$wrap-max:   1280px !default;
+$wrap-pad:   40px !default;
+
+// Motion
+$ease: cubic-bezier(0.22, 0.61, 0.36, 1) !default;
+
+// ============================================================
+// Bootstrap variable bridges — make Quarto's built-in
+// components (buttons, tables, links, code) inherit our palette.
+// ============================================================
+
+$body-bg:            $paper !default;
+$body-color:         $ink !default;
+
+$font-family-sans-serif: $serif !default;
+$font-family-serif:      $serif !default;
+$font-family-monospace:  $mono !default;
+$font-family-base:       $serif !default;
+
+$font-size-base:     1rem !default; // 17px when html font-size is 17px
+$line-height-base:   1.55 !default;
+
+$headings-font-family: $serif !default;
+$headings-font-weight: 600 !default;
+$headings-color:       $ink !default;
+
+$link-color:           $ink !default;
+$link-hover-color:     $accent !default;
+$link-decoration:      none !default;
+$link-hover-decoration: none !default;
+
+$primary:   $accent !default;
+$secondary: $ink-mute !default;
+$light:     $paper-2 !default;
+$dark:      $ink !default;
+
+$border-color:        $rule-strong !default;
+$hr-color:            $rule !default;
+$hr-opacity:          1 !default;
+
+$code-color:          $ink-2 !default;
+$code-bg:             $paper-2 !default;
+$pre-color:           $ink-2 !default;
+
+$table-color:         $ink !default;
+$table-bg:            transparent !default;
+$table-border-color:  $rule !default;
+
+// Quarto-specific
+$navbar-bg:           $paper !default;
+$navbar-fg:           $ink !default;
+$navbar-hl:           $accent !default;
+$footer-bg:           $paper !default;
+$footer-fg:           $ink-mute !default;

@@ -7,3 +7,7 @@ jupyter
 networkx
 pyvis
 pandas
+
+# Optional: RDF export verification. scripts/export_rdf.py itself has no
+# dependencies; rdflib is only needed to parse-check data/empire-evolution-crm.ttl.
+rdflib

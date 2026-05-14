@@ -1,0 +1,105 @@
+/*-- scss:rules --*/
+
+// Paper-id banner: sits between the topbar and the Quarto title block,
+// labelling the paper's number and the journal it belongs to.
+.wpcs-paper-id-banner {
+  border-bottom: 1px solid var(--rule, #e8e8ee);
+  padding: 18px 0 16px;
+  margin-bottom: 28px;
+}
+
+.wpcs-paper-id-banner__inner {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 56px);
+  padding-right: clamp(20px, 4vw, 56px);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.wpcs-paper-id-banner__num {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.wpcs-paper-id-banner__sep {
+  color: var(--ink-mute, #6b6b7a);
+  opacity: 0.6;
+}
+
+.wpcs-paper-id-banner a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.wpcs-paper-id-banner a:hover {
+  opacity: 0.7;
+}
+
+// Constrain the main body content for readable line lengths in paper subsites.
+// Topbar and footer keep full-bleed; body prose is centered and capped.
+
+#quarto-content.quarto-container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 56px);
+  padding-right: clamp(20px, 4vw, 56px);
+}
+
+main.content {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.quarto-title-block {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Slightly tighten the title block on paper pages.
+.quarto-title h1.title {
+  font-family: "EB Garamond", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+// Body text uses the journal's serif.
+main.content,
+main.content p,
+main.content li {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+main.content h2,
+main.content h3,
+main.content h4 {
+  font-family: "EB Garamond", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-top: 1.6em;
+}
+
+// Make the abstract feel a bit set-apart.
+.abstract {
+  font-style: italic;
+  border-left: 3px solid var(--ink, #1a1a2e);
+  padding-left: 1em;
+  margin: 1.5em 0;
+}
+
+// Margin sidebar (TOC etc.) is fine as-is, but make sure it doesn't crowd.
+#quarto-margin-sidebar {
+  padding-left: 1.5rem;
+}

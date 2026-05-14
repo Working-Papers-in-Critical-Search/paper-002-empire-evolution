@@ -1,0 +1,48 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+  resources:
+    - viz/empire_evolution.html
+
+website:
+  title: "Working Papers in Critical Search"
+  site-url: https://working-papers-in-critical-search.github.io/paper-002-empire-evolution/
+  # No Quarto navbar / page-footer — chrome injected via includes below
+  # to match the journal home site.
+
+format:
+  html:
+    theme:
+      - cosmo
+      - _tokens.scss
+      - _custom.scss
+      - _paper.scss
+    toc: true
+    code-fold: true
+    code-tools: true
+    anchor-sections: false
+    title-block-style: default
+    smooth-scroll: true
+    link-external-newwindow: true
+    include-in-header:
+      - _includes/fonts.html
+    include-before-body:
+      - _includes/topbar.html
+      - _includes/paper-id.html
+    include-after-body:
+      - _includes/footer.html
+      - text: '<script src="https://hypothes.is/embed.js" async></script>'
+
+comments:
+  giscus:
+    repo: Working-Papers-in-Critical-Search/home
+    category: "Comments"
+    mapping: url
+    reactions-enabled: true
+    loading: lazy
+    input-position: top
+
+execute:
+  freeze: auto

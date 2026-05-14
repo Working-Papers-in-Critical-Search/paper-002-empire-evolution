@@ -1,13 +1,13 @@
 # empire-evolution-wpcs
 
 A Cypher knowledge graph and interactive visualization of British imperial
-territorial evolution, prepared for submission to *Working Papers in Critical
-Search* (WPCS).
+territorial evolution, published in *Working Papers in Critical Search* (WPCS)
+as Paper № 002.
 
 ## Contents
 
-- `paper/empire-evolution-wpcs.qmd` — Quarto source for the paper
-- `paper/references.bib` — bibliography
+- `index.qmd` — Quarto source for the paper
+- `references.bib` — bibliography
 - `data/britishempire_kg_export.cypher` — full graph: 747 historical
   territories (314 colonial polities + 433 princely states) and 1,203 typed
   relationships
@@ -73,6 +73,28 @@ cypher-shell -u neo4j -p <password> -f data/britishempire_kg_export.cypher
 Neo4j 5.x is recommended (the export uses `CREATE CONSTRAINT IF NOT EXISTS
 FOR ... REQUIRE` syntax). Re-running is idempotent.
 
+## Generate the RDF publication layer
+
+```bash
+python3 scripts/export_rdf.py
+```
+
+Converts the Cypher graph to CIDOC-CRM RDF/Turtle at
+`data/empire-evolution-crm.ttl` — the EHRI-style publication layer described in
+the paper's "Why not CIDOC-CRM?" section. Territories become `crm:E74_Group`,
+formation/dissolution become `crm:E66_Formation`/`crm:E68_Dissolution` events,
+and territorial transitions become n-ary `crm:E81_Transformation` events. A
+territory's subject URI *is* its Wikidata entity URI when the QID is a clean
+exact match; otherwise a URI is minted and the QID attached as a `skos`
+match. The script has no dependencies; `pip install rdflib` only to
+parse-check the output:
+
+```bash
+python3 -c "import rdflib; print(len(rdflib.Graph().parse('data/empire-evolution-crm.ttl')))"
+```
+
+Use `--base-uri` to override the namespace for minted entities.
+
 ## Open the visualization
 
 ```bash
@@ -85,10 +107,11 @@ The data is embedded in the HTML; no server needed.
 ## Render the paper
 
 ```bash
-quarto render paper/empire-evolution-wpcs.qmd
+quarto render
 ```
 
-Renders both HTML and PDF if a TeX distribution is available.
+Renders the Quarto website (HTML) into `_site/`. The journal chrome is
+injected via `_includes/` and the theme stack in `_quarto.yml`.
 
 ## Citation
 
@@ -101,8 +124,12 @@ Territorial Evolution. Working Papers in Critical Search.
 
 ## License
 
-- Paper text: CC-BY 4.0
-- Dataset: CC-BY 4.0 (incorporates Wikidata QIDs and curated date/typology
-  decisions; Wikidata content itself is CC0)
+This repository is licensed in three parts, each under the license best
+suited to it:
+
+- **Paper text** (`index.qmd`, `references.bib`, `images/`): CC-BY 4.0
+- **Dataset** (`data/`, `viz/`): CC0 1.0 (public domain dedication).
+  Attribution is appreciated but not required.
+- **Code** (`scripts/`, `notebooks/`): MIT
 
 See `LICENSE` for full terms.

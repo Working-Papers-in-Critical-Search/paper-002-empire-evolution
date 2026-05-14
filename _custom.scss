@@ -1,0 +1,726 @@
+/*-- scss:rules --*/
+
+// ============================================================
+// Working Papers in Critical Search — base, chrome, utilities.
+// Consumes tokens from _tokens.scss.
+// ============================================================
+
+// ---------------- Base ----------------
+
+html {
+  scroll-behavior: smooth;
+  font-size: $fs-body;
+}
+
+html, body {
+  margin: 0;
+  background: $paper;
+  color: $ink;
+  font-family: $serif;
+  font-size: $fs-body;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+::selection { background: $ink; color: $paper; }
+
+a {
+  color: $ink;
+  text-decoration: none;
+  border-bottom: 1px solid $rule-strong;
+  transition: border-color 120ms $ease, color 120ms $ease;
+
+  &:hover {
+    color: $accent;
+    border-bottom-color: $accent;
+  }
+}
+
+// Buttons: inherit by default; Quarto buttons we restyle per context.
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+// Paper subsites keep the default Quarto layout (title block, TOC, body).
+// We only hide the Quarto navbar/footer wrappers since our own chrome via
+// include-before-body / include-after-body replaces those.
+//
+// (The home repo's _custom.scss additionally hides #title-block-header,
+// the sidebar/TOC, and strips Quarto's grid layout — those rules are
+// page-layout-custom-specific and intentionally omitted from the paper
+// version.)
+.navbar,
+body > .nav-footer,
+body > footer.footer,
+#quarto-header,
+#quarto-footer {
+  display: none !important;
+}
+
+// ---------------- Utilities ----------------
+
+.wpcs-mono      { font-family: $mono; font-feature-settings: "kern", "liga", "calt"; }
+.wpcs-micro     { font-family: $mono; font-size: $fs-micro; letter-spacing: 0.08em; text-transform: uppercase; color: $ink-mute; }
+.wpcs-small-mono{ font-family: $mono; font-size: $fs-mono; color: $ink-mute; }
+
+.wpcs-rule        { height: 1px; background: $rule; border: 0; margin: 0; }
+.wpcs-rule-strong { height: 1px; background: $ink; border: 0; margin: 0; opacity: 0.85; }
+
+.wpcs-tag {
+  font-family: $mono;
+  font-size: 11px;
+  color: $ink-mute;
+  letter-spacing: 0.02em;
+  padding: 2px 0;
+  border: 0;
+
+  &::before { content: "["; color: $ink-faint; margin-right: 1px; }
+  &::after  { content: "]"; color: $ink-faint; margin-left: 1px; }
+
+  &[data-active="true"] { color: $accent; }
+}
+
+.wpcs-kbd {
+  font-family: $mono;
+  font-size: 11px;
+  padding: 1px 5px;
+  border: 1px solid $rule-strong;
+  border-radius: 3px;
+  color: $ink-mute;
+  background: $paper-2;
+}
+
+// ---------------- Container & grid ----------------
+
+.wpcs-wrap {
+  max-width: $wrap-max;
+  margin: 0 auto;
+  padding: 0 $wrap-pad;
+}
+
+.wpcs-row {
+  display: grid;
+  grid-template-columns: #{$rail-w} 1fr;
+  gap: $col-gutter;
+}
+
+.wpcs-row--with-meta {
+  grid-template-columns: #{$rail-w} 1fr auto;
+}
+
+// ---------------- Topbar ----------------
+
+.wpcs-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 244, 242, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid $rule;
+}
+
+.wpcs-topbar__inner {
+  max-width: $wrap-max;
+  margin: 0 auto;
+  padding: 14px $wrap-pad;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.wpcs-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border: 0;
+  color: $ink;
+
+  &:hover { color: $ink; border: 0; }
+
+  .wpcs-wordmark__numero {
+    font-family: $mono;
+    font-size: 13px;
+    color: $ink-mute;
+    letter-spacing: 0.04em;
+  }
+
+  .wpcs-wordmark__title {
+    font-family: $serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+
+    @media (max-width: 720px) {
+      white-space: normal;
+      max-width: 16ch;
+    }
+
+    em {
+      font-style: italic;
+      font-weight: 400;
+      color: $ink-2;
+    }
+  }
+}
+
+.wpcs-nav {
+  display: flex;
+  gap: 28px;
+  justify-self: center;
+  font-family: $mono;
+  font-size: 13px;
+
+  a {
+    border: 0;
+    color: $ink-mute;
+    position: relative;
+    padding: 4px 0;
+    transition: color 120ms $ease;
+
+    &::before {
+      content: attr(data-idx) " ";
+      color: $ink-faint;
+      margin-right: 6px;
+    }
+
+    &:hover { color: $ink; }
+
+    &.is-active {
+      color: $ink;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -15px;
+        height: 1px;
+        background: $ink;
+      }
+    }
+  }
+}
+
+.wpcs-topbar__meta {
+  font-family: $mono;
+  font-size: 11.5px;
+  color: $ink-faint;
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+// ---------------- Footer ----------------
+
+.wpcs-foot {
+  border-top: 1px solid $rule;
+  margin-top: 120px;
+  padding: 48px 0 64px;
+  font-family: $mono;
+  font-size: 12px;
+  color: $ink-mute;
+  background: $paper;
+}
+
+.wpcs-foot__inner {
+  max-width: $wrap-max;
+  margin: 0 auto;
+  padding: 0 $wrap-pad;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+}
+
+.wpcs-foot h4 {
+  font-family: $mono;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $ink-faint;
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+
+.wpcs-foot a {
+  color: $ink-mute;
+  border: 0;
+
+  &:hover { color: $ink; }
+}
+
+.wpcs-foot ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wpcs-foot__coda {
+  max-width: $wrap-max;
+  margin: 40px auto 0;
+  padding: 24px $wrap-pad 0;
+  border-top: 1px solid $rule;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: $ink-faint;
+  letter-spacing: 0.04em;
+}
+
+// ---------------- Typography primitives used across pages ----------------
+
+.wpcs-hero-h1 {
+  margin: 0;
+  font-family: $serif;
+  font-size: $fs-display;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  max-width: 900px;
+
+  em {
+    font-style: italic;
+    font-weight: 400;
+    color: $accent;
+  }
+}
+
+.wpcs-page-h1 {
+  margin: 0;
+  font-family: $serif;
+  font-size: $fs-h1;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.wpcs-lead {
+  font-family: $serif;
+  font-size: $fs-lead;
+  line-height: 1.55;
+  color: $ink-2;
+  max-width: 680px;
+  text-wrap: pretty;
+}
+
+// ---------------- Section head (№ NN · Title) ----------------
+
+.wpcs-section-head {
+  display: grid;
+  grid-template-columns: #{$rail-w} 1fr auto;
+  align-items: baseline;
+  gap: $col-gutter;
+  margin-bottom: 32px;
+
+  h2 {
+    margin: 0;
+    font-family: $serif;
+    font-size: $fs-h2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .wpcs-section-head__trailing {
+    font-family: $mono;
+    font-size: $fs-mono;
+    color: $ink-mute;
+  }
+}
+
+// ---------------- Home page ----------------
+
+.wpcs-home {
+  // Each section handles its own vertical padding so we can alternate
+  // wrap-constrained and full-bleed band sections cleanly.
+}
+
+.wpcs-section {
+  padding: 80px $wrap-pad;
+}
+
+.wpcs-section--flush {
+  padding: 60px $wrap-pad 40px;
+}
+
+.wpcs-band {
+  background: $paper-2;
+  padding: 80px 0;
+  border-top: 1px solid $rule;
+  border-bottom: 1px solid $rule;
+}
+
+// Masthead
+.wpcs-masthead {
+  padding: 64px $wrap-pad 48px;
+  border-bottom: 1px solid $rule;
+}
+
+.wpcs-masthead__grid {
+  display: grid;
+  grid-template-columns: #{$rail-w} 1fr auto;
+  gap: $col-gutter;
+  align-items: end;
+}
+
+.wpcs-masthead__ctas {
+  margin-top: 36px;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.wpcs-masthead__vlabel {
+  font-family: $mono;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: $ink-faint;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: right;
+}
+
+.wpcs-lead + .wpcs-masthead__ctas { margin-top: 36px; }
+
+// Explicit lead spacing after hero
+.wpcs-hero-h1 + .wpcs-lead { margin-top: 72px; }
+
+// Mono CTA links
+.wpcs-cta {
+  font-size: 13px;
+  color: $ink-mute;
+  border-bottom: 1px solid $rule-strong;
+  padding-bottom: 2px;
+
+  &:hover { color: $accent; border-bottom-color: $accent; }
+}
+
+.wpcs-cta--primary {
+  color: $ink;
+  border-bottom-color: $ink;
+}
+
+// § 01 Formats grid
+.wpcs-formats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 48px;
+  max-width: 900px;
+}
+
+.wpcs-format-card {
+  border-top: 1px solid $ink;
+  padding-top: 16px;
+
+  .wpcs-format-card__idx { margin-bottom: 8px; }
+
+  h3 {
+    margin: 0 0 10px;
+    font-family: $serif;
+    font-size: $fs-h3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin: 0;
+    color: $ink-2;
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+}
+
+// § 02 Empty state
+.wpcs-empty {
+  padding-top: 8px;
+}
+
+// § 03 Cite block
+.wpcs-cite-block {
+  margin: 0;
+  font-family: $mono;
+  font-size: 13.5px;
+  background: $paper-2;
+  padding: 20px 24px;
+  border-left: 2px solid $ink;
+  color: $ink-2;
+  line-height: 1.7;
+  overflow-x: auto;
+  max-width: 760px;
+  white-space: pre;
+}
+
+.wpcs-cite-note {
+  margin-top: 20px;
+  color: $ink-mute;
+  font-size: 14.5px;
+  max-width: 680px;
+}
+
+// § 04 Editors
+.wpcs-editors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 900px;
+}
+
+.wpcs-editor {
+  border-top: 1px solid $ink;
+  padding-top: 20px;
+
+  .wpcs-micro { margin-bottom: 10px; }
+
+  h3 {
+    margin: 0 0 4px;
+    font-family: $serif;
+    font-size: $fs-h3;
+    font-weight: 600;
+
+    a { border-bottom: 1px solid $rule-strong; }
+  }
+
+  .wpcs-small-mono { margin-bottom: 12px; }
+
+  p {
+    margin: 0;
+    color: $ink-2;
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+}
+
+.wpcs-editor__tags {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+// Submit CTA row
+.wpcs-submit-cta {
+  border-top: 1px solid $ink;
+  border-bottom: 1px solid $ink;
+  padding: 48px 0;
+  display: grid;
+  grid-template-columns: #{$rail-w} 1fr auto;
+  gap: $col-gutter;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    font-family: $serif;
+    font-size: $fs-h2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+}
+
+.wpcs-submit-cta__btn {
+  font-size: 13px;
+  padding: 12px 20px;
+  border: 1px solid $ink;
+  color: $ink;
+  white-space: nowrap;
+
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+// ---------------- Paper list rows (home + papers index) ----------------
+
+.wpcs-paper-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.wpcs-paper-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 32px;
+  align-items: start;
+  padding: 28px 0;
+  border-top: 1px solid $rule;
+  border-bottom: 0;
+  color: $ink;
+
+  &.is-first { border-top: 1px solid $ink; }
+  &:hover { color: $ink; border-top-color: $ink; }
+}
+
+.wpcs-paper-row__num {
+  font-family: $mono;
+  font-size: 13px;
+  color: $ink-mute;
+  padding-top: 4px;
+}
+
+.wpcs-paper-row__meta {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.wpcs-paper-row__title {
+  margin: 0 0 10px;
+  font-family: $serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  text-wrap: pretty;
+  max-width: 760px;
+}
+
+.wpcs-paper-row__authors { color: $ink-mute; }
+
+.wpcs-paper-row__tags {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.wpcs-paper-row__fp {
+  color: $ink-mute;
+  padding-top: 6px;
+}
+
+@media (max-width: 768px) {
+  .wpcs-paper-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .wpcs-paper-row__fp { display: none; }
+}
+
+// ---------------- About page / prose ----------------
+
+.wpcs-prose-list {
+  font-family: $serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: $ink;
+  margin: 20px 0 0;
+  padding-left: 20px;
+
+  li + li { margin-top: 8px; }
+  strong { font-weight: 600; }
+}
+
+.wpcs-subhead {
+  font-family: $serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: $ink;
+  margin: 28px 0 10px;
+  letter-spacing: -0.005em;
+
+  &:first-child { margin-top: 0; }
+}
+
+.wpcs-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: wpcs-step;
+
+  li {
+    position: relative;
+    padding: 20px 0 20px 0;
+    border-top: 1px solid rgba($ink, 0.12);
+
+    &:last-child { border-bottom: 1px solid rgba($ink, 0.12); }
+
+    .wpcs-micro { margin-bottom: 8px; }
+    p {
+      font-family: $serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: $ink;
+      margin: 0;
+      max-width: 640px;
+    }
+  }
+}
+
+.wpcs-colophon {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $mono;
+  font-size: 13px;
+  line-height: 1.55;
+  color: $ink;
+
+  td {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba($ink, 0.1);
+    vertical-align: top;
+  }
+  td:first-child {
+    font-weight: 600;
+    padding-right: 20px;
+    white-space: nowrap;
+    width: 1%;
+  }
+}
+
+// ---------------- Responsive collapse (single breakpoint) ----------------
+
+@media (max-width: 768px) {
+  .wpcs-row,
+  .wpcs-row--with-meta,
+  .wpcs-section-head,
+  .wpcs-masthead__grid,
+  .wpcs-submit-cta {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .wpcs-formats,
+  .wpcs-editors {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .wpcs-topbar__inner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px 20px;
+  }
+
+  .wpcs-nav { justify-self: start; flex-wrap: wrap; gap: 16px; }
+  .wpcs-topbar__meta { display: none; }
+
+  .wpcs-wrap { padding: 0 20px; }
+  .wpcs-masthead { padding: 40px 20px 32px; }
+  .wpcs-section { padding: 48px 20px; }
+  .wpcs-section--flush { padding: 40px 20px 24px; }
+  .wpcs-masthead__vlabel { display: none; }
+
+  .wpcs-foot__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .wpcs-hero-h1 { font-size: 40px; }
+  .wpcs-page-h1 { font-size: 32px; }
+  .wpcs-hero-h1 + .wpcs-lead { margin-top: 40px; }
+}

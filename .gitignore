@@ -1,28 +1,41 @@
 # Quarto
+/_site/
 /.quarto/
 /_freeze/
-/paper/_freeze/
-/paper/.quarto/
-/paper/empire-evolution-wpcs.html
-/paper/empire-evolution-wpcs.pdf
-/paper/empire-evolution-wpcs_files/
+*_files/
 
-# Editors
-*.swp
-*.swo
-.vscode/
-.idea/
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# FalkorDB local DB (regeneratable from data/britishempire_kg_export.cypher)
+empire.db
+empire.db.settings
+
+# Large data (should be on Zenodo)
+*.csv.gz
+*.parquet
+*.h5
 
 # OS
 .DS_Store
 Thumbs.db
+
 # Windows web-of-trust + Dropbox xattr sidecars
 *:Zone.Identifier
 *:com.dropbox.attrs
 
-# FalkorDBLite local DB (regeneratable from data/britishempire_kg_export.cypher)
-empire.db
-empire.db.settings
+# Editors / IDE
+*.swp
+*.swo
+.idea/
+.vscode/
 
 # Secrets
 .env
+*.pem
