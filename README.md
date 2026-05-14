@@ -1,8 +1,12 @@
 # empire-evolution-wpcs
 
+[![DOI](https://zenodo.org/badge/1239221922.svg)](https://doi.org/10.5281/zenodo.20189978)
+
 A Cypher knowledge graph and interactive visualization of British imperial
 territorial evolution, published in *Working Papers in Critical Search* (WPCS)
 as Paper № 002.
+
+**Live paper:** <https://working-papers-in-critical-search.github.io/paper-002-empire-evolution/>
 
 ## Contents
 
@@ -117,10 +121,13 @@ injected via `_includes/` and the theme stack in `_quarto.yml`.
 
 ```
 Clifford, Jim. (2026). A Cypher Knowledge Graph of British Imperial
-Territorial Evolution. Working Papers in Critical Search.
+Territorial Evolution. Working Papers in Critical Search, Paper № 002, v1.0.
+https://doi.org/10.5281/zenodo.20189979
 ```
 
-(Update with version tag and DOI on publication.)
+Cite the v1.0 snapshot via its version DOI above. Future revisions mint their
+own DOIs; the concept DOI `10.5281/zenodo.20189978` always resolves to the
+latest version.
 
 ## License
 
