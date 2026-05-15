@@ -121,13 +121,14 @@ injected via `_includes/` and the theme stack in `_quarto.yml`.
 
 ```
 Clifford, Jim. (2026). A Cypher Knowledge Graph of British Imperial
-Territorial Evolution. Working Papers in Critical Search, Paper № 002, v1.0.
-https://doi.org/10.5281/zenodo.20189979
+Territorial Evolution. Working Papers in Critical Search, Paper № 002.
+https://doi.org/10.5281/zenodo.20189978
 ```
 
-Cite the v1.0 snapshot via its version DOI above. Future revisions mint their
-own DOIs; the concept DOI `10.5281/zenodo.20189978` always resolves to the
-latest version.
+The citation uses the concept DOI (`10.5281/zenodo.20189978`), which always
+resolves to the latest version. To pin to a specific snapshot, use that
+version's DOI instead — e.g. v1.0 = `10.5281/zenodo.20189979`,
+v1.1 (PDF added) = `10.5281/zenodo.20218949`.
 
 ## License
 

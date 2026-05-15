@@ -35,6 +35,32 @@ format:
       - _includes/footer.html
       - _includes/mobile-toc.html
       - text: '<script src="https://hypothes.is/embed.js" async></script>'
+  pdf:
+    documentclass: scrartcl
+    papersize: letter
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    linestretch: 1.15
+    colorlinks: true
+    linkcolor: NavyBlue
+    urlcolor: NavyBlue
+    citecolor: NavyBlue
+    toc: false
+    number-sections: true
+    pdf-engine: xelatex
+    keep-tex: false
+    fig-pos: 'H'
+    include-in-header:
+      text: |
+        \usepackage{microtype}
+        \usepackage{float}
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhf{}
+        \fancyhead[L]{\small\itshape Working Papers in Critical Search}
+        \fancyhead[R]{\small\thepage}
+        \renewcommand{\headrulewidth}{0.4pt}
 
 comments:
   giscus:

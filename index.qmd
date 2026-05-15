@@ -6,7 +6,7 @@ author:
     affiliation: University of Saskatchewan
     email: jim.clifford@usask.ca
 date: "2026-05-14"
-doi: 10.5281/zenodo.20189979
+doi: 10.5281/zenodo.20189978
 abstract: |
   This paper presents a curated Cypher knowledge graph documenting the
   territorial evolution of the British Empire from the early-modern period
@@ -28,6 +28,7 @@ abstract: |
 format:
   html:
     number-sections: true
+  pdf: default
 bibliography: references.bib
 ---
 
