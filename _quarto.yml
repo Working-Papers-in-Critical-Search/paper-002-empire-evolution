@@ -33,6 +33,7 @@ format:
       - _includes/paper-id.html
     include-after-body:
       - _includes/footer.html
+      - _includes/mobile-toc.html
       - text: '<script src="https://hypothes.is/embed.js" async></script>'
 
 comments:

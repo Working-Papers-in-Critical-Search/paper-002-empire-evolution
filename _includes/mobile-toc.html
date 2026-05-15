@@ -1,0 +1,16 @@
+<script>
+(function() {
+  var toc = document.querySelector('nav#TOC');
+  var titleBlock = document.querySelector('#title-block-header');
+  if (!toc || !titleBlock) return;
+  var ul = toc.querySelector('ul');
+  if (!ul) return;
+  var details = document.createElement('details');
+  details.className = 'wpcs-mobile-toc';
+  var summary = document.createElement('summary');
+  summary.textContent = 'On this page';
+  details.appendChild(summary);
+  details.appendChild(ul.cloneNode(true));
+  titleBlock.insertAdjacentElement('afterend', details);
+})();
+</script>
