@@ -9,6 +9,8 @@ project:
 website:
   title: "Working Papers in Critical Search"
   site-url: https://working-papers-in-critical-search.github.io/paper-002-empire-evolution/
+  open-graph: true
+  twitter-card: true
   # No Quarto navbar / page-footer — chrome injected via includes below
   # to match the journal home site.
 
@@ -28,6 +30,10 @@ format:
     link-external-newwindow: true
     include-in-header:
       - _includes/fonts.html
+      - text: |
+          <link rel="canonical" href="https://working-papers-in-critical-search.github.io/paper-002-empire-evolution/">
+          <meta property="og:url" content="https://working-papers-in-critical-search.github.io/paper-002-empire-evolution/">
+          <meta name="twitter:url" content="https://working-papers-in-critical-search.github.io/paper-002-empire-evolution/">
     include-before-body:
       - _includes/topbar.html
       - _includes/paper-id.html
