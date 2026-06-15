@@ -99,9 +99,15 @@ main.content h4 {
   margin: 1.5em 0;
 }
 
-// Margin sidebar (TOC etc.) is fine as-is, but make sure it doesn't crowd.
+// Margin sidebar (TOC etc.). The injected sticky topbar otherwise lands on top
+// of the "On this page" list, which starts at the very top of the content grid.
+// Push the TOC down past the topbar (resting + pinned) and give it enough left
+// clearance that the heading doesn't clip against the content column.
 #quarto-margin-sidebar {
-  padding-left: 1.5rem;
+  padding-left: 3rem;
+  margin-top: 4.5rem;
+  top: 4.5rem !important;
+  max-height: calc(100vh - 5.5rem) !important;
 }
 
 // Mobile TOC — hidden on desktop; on phones, the script in
